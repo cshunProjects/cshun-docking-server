@@ -1,4 +1,4 @@
-import { Get, Controller, Param, Post, Body, UseGuards, Req } from '@nestjs/common';
+import { Get, Controller, Param, Post, Body, UseGuards, Req, ForbiddenException, Put } from '@nestjs/common';
 import { User } from 'entities/User';
 import { Connection, EntityManager } from 'typeorm';
 import { AuthGuard } from '@nestjs/passport';
@@ -23,15 +23,21 @@ export class UserController {
         console.log(req.user);
         return await User.find({});
     }
-    // @Get("/:id")
-    // async getById(@Param('id') id) {
-    //     return await MainBody.findOne(id);
-    // }
 
-    // @Post()
-    // async create(@Body() input) {
-    //     const mainBody = new MainBody(input);
-    //     console.log(mainBody);
-    //     return await mainBody.save();
-    // }
+    @Post()
+    @UseGuards(AuthGuard('jwt'))
+    async create(@Req() req,@Body() body) {
+        if(!req.user.isAdmin) throw new ForbiddenException("Only admin can add a user.");
+        const newUser = new User(body);
+        return await newUser.save();
+    }
+
+    @Put(":id")
+    @UseGuards(AuthGuard('jwt'))
+    async put(@Req() req,@Param('id') id,@Body() body) {
+        if(!req.user.isAdmin) throw new ForbiddenException("Only admin can put a user.");
+        let user = await User.findOne(id);
+        Object.assign(user,body);
+        return await user.save();
+    }
 }

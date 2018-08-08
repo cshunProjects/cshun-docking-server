@@ -2,7 +2,12 @@ import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Col
 import { Options } from "@nestjs/common";
 import { MainBody } from "./MainBody";
 import { User } from "./User";
-
+export enum EnrollmentType {
+    FruitAndVeg = "FruitAndVeg",
+    Bird = "Bird",
+    Animal = "Animal",
+    Product = "Product",
+}
 @Entity()
 export class Enrollment extends BaseEntity {
 
@@ -21,43 +26,46 @@ export class Enrollment extends BaseEntity {
     @Column("simple-json",{ nullable: false })
     contacts: Array<{name:string,phone:string}>
 
+    @Column({nullable:false})
+    type: EnrollmentType;
+
     @Column({ nullable: false })
     category: string;
 
     /**
      * 规模
      */
-    @Column()
+    @Column({ nullable: true })
     scale: string;
 
     /**
      * 产量
      */
-    @Column()
+    @Column({ nullable: true })
     production: string;
     
-    @Column()
-    marketDateBegin: Date;
+    @Column({ nullable: true })
+    marketDateBegin: string;
 
-    @Column()
-    marketDateEnd: Date;
+    @Column({ nullable: true })
+    marketDateEnd: string;
 
-    @Column()
+    @Column({ nullable: true })
     salesRatio: number;
 
-    @Column()
+    @Column({ nullable: true })
     salesRoute: string;
 
-    @Column()
+    @Column({ nullable: true })
     rawDemand: string;
 
-    @Column()
+    @Column({ nullable: true })
     rawDemandDate: string;
 
-    @Column()
+    @Column({ nullable: true })
     purchaseRatio: number;
 
-    @Column("simple-json")
+    @Column("simple-json",{ nullable: true })
     more: string;
 
     @ManyToOne(type => User, user => user.enrollments,{nullable : false})
