@@ -6,9 +6,8 @@ export class EnrollmentController {
     constructor() { }
 
     @Get()
-    @UseGuards(AuthGuard('jwt'))
     async getAll(@Req() req) {
-        return await Enrollment.createQueryBuilder().where("creatorID = :id",{id:req.user.id}).getMany();
+        return await Enrollment.createQueryBuilder().getMany();
     }
     @Get("/:id")
     @UseGuards(AuthGuard('jwt'))

@@ -44,6 +44,12 @@ export class Enrollment extends BaseEntity {
     @Column({ nullable: true })
     production: string;
     
+    /**
+     * 种植时间
+     */
+    @Column({nullable: true})
+    plantDate: string;
+
     @Column({ nullable: true })
     marketDateBegin: string;
 
