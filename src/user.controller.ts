@@ -7,9 +7,11 @@ import {
   UseGuards,
   Req,
   ForbiddenException,
+  NotFoundException,
   Put,
   ValidationPipe,
   UsePipes,
+  Delete,
 } from '@nestjs/common';
 import { User, UserAdminType } from 'entities/User';
 import { Connection, EntityManager } from 'typeorm';
@@ -19,6 +21,10 @@ import {
   ApiUseTags,
   ApiBearerAuth,
   ApiOperation,
+  ApiOkResponse,
+  ApiImplicitParam,
+  ApiForbiddenResponse 
+
 } from '@nestjs/swagger';
 @ApiUseTags('用户管理')
 @ApiBearerAuth()
@@ -112,5 +118,20 @@ export class UserController {
       Object.assign(user, body);
       return await user.save();
     } else throw new ForbiddenException('Permission denied');
+  }
+
+  @ApiOperation({title:"删除用户"})
+  @ApiOkResponse({description:"删除成功"})
+  @ApiForbiddenResponse({description:"只有超级管理员拥有删除权限"})
+  @ApiResponse({status:404,description:"用户id不存在"})
+  @ApiImplicitParam({name:"id",type:Number})
+  @UseGuards(AuthGuard('jwt'))
+  @Delete("/:id")
+  async remove(@Req() req,@Param("id") id) {
+    if(req.user.adminLevel !== UserAdminType.Super) throw new ForbiddenException("Permission denied");
+    let user =await User.findOne(id);
+    if(!user) throw new NotFoundException();
+    await user.remove();
+    return "deleted";
   }
 }
