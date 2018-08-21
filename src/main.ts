@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('长顺产销对接系统后端接口')
     .setVersion('0')
     .addBearerAuth('Authorization','header')
+    .setSchemes(process.env['NODE_ENV']==='production' ? "https" :"http")
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
