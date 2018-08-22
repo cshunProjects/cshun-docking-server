@@ -6,11 +6,11 @@ import { AppService } from 'app.service';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { UserController } from 'user.controller';
-// import { EnrollmentController } from 'enrollment.controller';
+import { VegEnrollmentController } from 'veg-enrollment.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot()],
-  controllers: [AppController,UserController],
+  controllers: [AppController,UserController,VegEnrollmentController],
   providers: [AppService,AuthService,JwtStrategy],
 })
 export class AppModule {

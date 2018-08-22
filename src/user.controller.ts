@@ -23,7 +23,8 @@ import {
   ApiOperation,
   ApiOkResponse,
   ApiImplicitParam,
-  ApiForbiddenResponse 
+  ApiForbiddenResponse ,
+  ApiImplicitBody,
 
 } from '@nestjs/swagger';
 @ApiUseTags('用户管理')
@@ -78,6 +79,7 @@ export class UserController {
   })
   @ApiResponse({ status: 200, type: User })
   @ApiResponse({ status: 403 })
+  @ApiImplicitBody({name:"User",type:User})
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(
     new ValidationPipe({
@@ -94,7 +96,7 @@ export class UserController {
     return await newUser.save();
   }
 
-  @Put(':id')
+  
   @ApiOperation({
     title: '修改用户信息(包括更新密码)',
     description: '无需提供所有字段.',
@@ -107,7 +109,17 @@ export class UserController {
     status: 403,
     description: '只有超级管理员和用户本身可以修改用户信息',
   })
+  @ApiImplicitBody({name:"User",type:User})
+  @ApiImplicitParam({name:"id",type:Number})
   @UseGuards(AuthGuard('jwt'))
+  @UsePipes(
+    new ValidationPipe({
+      forbidUnknownValues: true,
+      transform: true,
+      skipMissingProperties:true
+    }),
+  )
+  @Put(':id')
   async replace(
     @Req() req,
     @Param('id') id: number,
