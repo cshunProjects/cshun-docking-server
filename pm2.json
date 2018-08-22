@@ -1,10 +1,10 @@
 {
     "apps": [{
       "name": "cshun-docking-server",
-      "script": "yarn start:prod",
+      "script": "npm run start:prod",
       "instances" : 0,
       "exec_mode" : "cluster",
-      "post_update": ["yarn install --dev", "echo starting~"],
+      "post_update": ["npm install", "echo starting~"],
       "env": {
         "production": true
       }
