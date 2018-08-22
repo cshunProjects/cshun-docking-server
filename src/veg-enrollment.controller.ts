@@ -13,8 +13,8 @@ import {
   ValidationPipe,
   UsePipes
 } from '@nestjs/common';
-import { VegEnrollment } from 'entities/VegEnrollment';
-import { User, UserAdminType } from 'entities/User';
+import { VegEnrollment } from './entities/VegEnrollment';
+import { User, UserAdminType } from './entities/User';
 import { AuthGuard } from '@nestjs/passport';
 import {
     ApiResponse,

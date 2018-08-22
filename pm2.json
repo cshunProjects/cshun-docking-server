@@ -1,0 +1,12 @@
+{
+    "apps": [{
+      "name": "cshun-docking-server",
+      "script": "yarn start:prod",
+      "instances" : 0,
+      "exec_mode" : "cluster",
+      "post_update": ["yarn install --dev", "echo starting~"],
+      "env": {
+        "production": true
+      }
+    }]
+  }

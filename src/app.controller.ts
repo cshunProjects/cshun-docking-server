@@ -1,6 +1,6 @@
 import { Get, Controller, Post, Body, BadRequestException, UseGuards, Query,Req } from '@nestjs/common';
-import { AppService } from 'app.service';
-import { AuthService } from "auth.service";
+import { AppService } from './app.service';
+import { AuthService } from "./auth.service";
 import { User } from './entities/User';
 import { AuthGuard } from '@nestjs/passport';
 import {

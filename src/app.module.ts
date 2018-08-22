@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from 'app.controller';
+import { AppController } from './app.controller';
 // import {MainBodyController} from 'mainbody.controller';
-import { AppService } from 'app.service';
+import { AppService } from './app.service';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { UserController } from 'user.controller';
-import { VegEnrollmentController } from 'veg-enrollment.controller';
+import { UserController } from './user.controller';
+import { VegEnrollmentController } from './veg-enrollment.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot()],

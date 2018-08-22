@@ -13,7 +13,7 @@ import {
   UsePipes,
   Delete,
 } from '@nestjs/common';
-import { User, UserAdminType } from 'entities/User';
+import { User, UserAdminType } from './entities/User';
 import { Connection, EntityManager } from 'typeorm';
 import { AuthGuard } from '@nestjs/passport';
 import {
