@@ -33,9 +33,9 @@
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
     "sqlite3": "^4.0.2",
+    "ts-node": "^4.1.0",
     "typeorm": "^0.2.7",
-    "typescript": "^2.6.2",
-    "ts-node": "^4.1.0"
+    "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.0.0",
