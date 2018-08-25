@@ -51,6 +51,7 @@ let VegEnrollmentController = VegEnrollmentController_1 = class VegEnrollmentCon
     }
     getById(req, id) {
         return __awaiter(this, void 0, void 0, function* () {
+            id = parseInt(id, 10);
             const enrollment = yield VegEnrollment_1.VegEnrollment.findOne(id);
             if (!enrollment)
                 throw new common_1.NotFoundException();
@@ -69,6 +70,7 @@ let VegEnrollmentController = VegEnrollmentController_1 = class VegEnrollmentCon
     }
     put(req, id, input) {
         return __awaiter(this, void 0, void 0, function* () {
+            id = parseInt(id, 10);
             let enrollment = yield VegEnrollment_1.VegEnrollment.findOne(id);
             if (!enrollment)
                 throw new common_1.NotFoundException();
@@ -81,6 +83,7 @@ let VegEnrollmentController = VegEnrollmentController_1 = class VegEnrollmentCon
     }
     delete(req, id) {
         return __awaiter(this, void 0, void 0, function* () {
+            id = parseInt(id, 10);
             let enrollment = yield VegEnrollment_1.VegEnrollment.findOne(id);
             if (!enrollment)
                 throw new common_1.NotFoundException();

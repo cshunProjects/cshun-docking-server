@@ -66,6 +66,7 @@ let UserController = class UserController {
     }
     replace(req, id, body) {
         return __awaiter(this, void 0, void 0, function* () {
+            id = parseInt(id, 10);
             if (req.user.adminLevel === User_1.UserAdminType.Super || req.user.id === id) {
                 let user = yield User_1.User.findOne(id);
                 Object.assign(user, body);
@@ -77,6 +78,7 @@ let UserController = class UserController {
     }
     remove(req, id) {
         return __awaiter(this, void 0, void 0, function* () {
+            id = parseInt(id, 10);
             if (req.user.adminLevel !== User_1.UserAdminType.Super)
                 throw new common_1.ForbiddenException("Permission denied");
             let user = yield User_1.User.findOne(id);
@@ -146,7 +148,7 @@ __decorate([
     __param(1, common_1.Param('id')),
     __param(2, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Number, User_1.User]),
+    __metadata("design:paramtypes", [Object, Object, User_1.User]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "replace", null);
 __decorate([

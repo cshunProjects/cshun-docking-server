@@ -12,13 +12,14 @@ const dotenv = require("dotenv");
 const core_1 = require("@nestjs/core");
 const swagger_1 = require("@nestjs/swagger");
 const app_module_1 = require("./app.module");
+const fs_1 = require("fs");
 dotenv.config();
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = yield core_1.NestFactory.create(app_module_1.AppModule, { cors: true });
         const options = new swagger_1.DocumentBuilder()
             .setTitle('长顺产销对接系统后端接口')
-            .setVersion('0')
+            .setVersion(fs_1.readFileSync('.git/refs/heads/master').toString().slice(0, 7))
             .addBearerAuth('Authorization', 'header')
             .setSchemes(process.env['NODE_ENV'] === 'production' ? "https" : "http")
             .build();

@@ -81,6 +81,7 @@ __decorate([
 ], AppController.prototype, "login", null);
 __decorate([
     common_1.Get('me'),
+    swagger_1.ApiBearerAuth(),
     common_1.UseGuards(passport_1.AuthGuard('jwt')),
     __param(0, common_1.Req()),
     __metadata("design:type", Function),
