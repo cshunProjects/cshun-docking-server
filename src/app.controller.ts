@@ -47,6 +47,7 @@ export class AppController {
   }
 
   @Get('me')
+  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   async me(@Req() req){
     return req.user;

@@ -68,6 +68,7 @@ export class VegEnrollmentController {
   @UseGuards(AuthGuard('jwt'))
   @Get('/:id')
   async getById(@Req() req, @Param('id') id) {
+    id = parseInt(id,10);
     const enrollment = await VegEnrollment.findOne(id);
     if (!enrollment) throw new NotFoundException();
     const user:User = req.user;
@@ -112,6 +113,7 @@ export class VegEnrollmentController {
   @UseGuards(AuthGuard('jwt'))
   @Put('/:id')
   async put(@Req() req, @Param('id') id, @Body() input) {
+    id = parseInt(id,10);
     let enrollment = await VegEnrollment.findOne(id);
     if (!enrollment) throw new NotFoundException();
     if (await VegEnrollmentController.hasPolicy(req.user,enrollment)){
@@ -128,6 +130,7 @@ export class VegEnrollmentController {
   @Delete('/:id')
   @UseGuards(AuthGuard('jwt'))
   async delete(@Req() req, @Param('id') id) {
+    id = parseInt(id,10);
     let enrollment = await VegEnrollment.findOne(id);
     if (!enrollment) throw new NotFoundException();
     if (await VegEnrollmentController.hasPolicy(req.user,enrollment)) {

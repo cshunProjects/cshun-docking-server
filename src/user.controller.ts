@@ -122,9 +122,10 @@ export class UserController {
   @Put(':id')
   async replace(
     @Req() req,
-    @Param('id') id: number,
+    @Param('id') id,
     @Body() body: User,
   ): Promise<User> {
+    id = parseInt(id,10);
     if (req.user.adminLevel === UserAdminType.Super || req.user.id === id) {
       let user = await User.findOne(id);
       Object.assign(user, body);
@@ -140,6 +141,7 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @Delete("/:id")
   async remove(@Req() req,@Param("id") id) {
+    id = parseInt(id,10);
     if(req.user.adminLevel !== UserAdminType.Super) throw new ForbiddenException("Permission denied");
     let user =await User.findOne(id);
     if(!user) throw new NotFoundException();
