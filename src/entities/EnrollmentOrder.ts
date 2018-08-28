@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity ,OneToMany, ManyToOne} from "typeorm";
 import { Options } from "@nestjs/common";
-import {IsAlphanumeric,Length,IsString,MaxLength, IsNumberString} from "class-validator";
+import {IsAlphanumeric,Length,IsString,MaxLength, IsNumberString, Allow} from "class-validator";
+import {Exclude} from "class-transformer";
 import { ApiModelProperty,ApiModelPropertyOptional } from '@nestjs/swagger';
 
 export enum EnrollmentType {
@@ -20,22 +21,30 @@ export class EnrollmentOrder extends BaseEntity {
     id: number;
 
     @Column()
+    @Exclude()
     type: EnrollmentType;
 
     @Column('int')
+    @Exclude()
     enrollmentId:number;
 
+    @Allow()
     @ApiModelProperty({description:"销售地址(规范到地级市)"})
     @Column()
     address:string;
 
+    @Allow()
     @ApiModelPropertyOptional({description:"每斤价格"})
     @Column('double')
     price: number;
 
-    @ApiModelProperty({description:"销售模式"})
+    @Allow()
+    @ApiModelProperty({description:"销售模式",enum:SaleMode})
     @Column({enum:SaleMode})
     saleMode: SaleMode;
-
+    constructor(init?: Partial<EnrollmentOrder>) {
+        super();
+        Object.assign(this, init);
+    }
 
 }
