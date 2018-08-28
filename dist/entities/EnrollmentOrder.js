@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 const swagger_1 = require("@nestjs/swagger");
 var EnrollmentType;
 (function (EnrollmentType) {
@@ -23,6 +25,10 @@ var SaleMode;
     SaleMode["SafeMarket"] = "SafeMarket";
 })(SaleMode = exports.SaleMode || (exports.SaleMode = {}));
 let EnrollmentOrder = class EnrollmentOrder extends typeorm_1.BaseEntity {
+    constructor(init) {
+        super();
+        Object.assign(this, init);
+    }
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
@@ -30,29 +36,35 @@ __decorate([
 ], EnrollmentOrder.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
+    class_transformer_1.Exclude(),
     __metadata("design:type", String)
 ], EnrollmentOrder.prototype, "type", void 0);
 __decorate([
     typeorm_1.Column('int'),
+    class_transformer_1.Exclude(),
     __metadata("design:type", Number)
 ], EnrollmentOrder.prototype, "enrollmentId", void 0);
 __decorate([
+    class_validator_1.Allow(),
     swagger_1.ApiModelProperty({ description: "销售地址(规范到地级市)" }),
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], EnrollmentOrder.prototype, "address", void 0);
 __decorate([
+    class_validator_1.Allow(),
     swagger_1.ApiModelPropertyOptional({ description: "每斤价格" }),
     typeorm_1.Column('double'),
     __metadata("design:type", Number)
 ], EnrollmentOrder.prototype, "price", void 0);
 __decorate([
-    swagger_1.ApiModelProperty({ description: "销售模式" }),
+    class_validator_1.Allow(),
+    swagger_1.ApiModelProperty({ description: "销售模式", enum: SaleMode }),
     typeorm_1.Column({ enum: SaleMode }),
     __metadata("design:type", String)
 ], EnrollmentOrder.prototype, "saleMode", void 0);
 EnrollmentOrder = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity(),
+    __metadata("design:paramtypes", [Object])
 ], EnrollmentOrder);
 exports.EnrollmentOrder = EnrollmentOrder;
 //# sourceMappingURL=EnrollmentOrder.js.map

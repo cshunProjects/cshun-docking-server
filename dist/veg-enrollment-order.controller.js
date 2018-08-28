@@ -26,7 +26,6 @@ const VegEnrollment_1 = require("./entities/VegEnrollment");
 const User_1 = require("./entities/User");
 const passport_1 = require("@nestjs/passport");
 const swagger_1 = require("@nestjs/swagger");
-const EnrollmentOrder_1 = require("entities/EnrollmentOrder");
 let VegEnrollmentController = VegEnrollmentController_1 = class VegEnrollmentController {
     constructor() { }
     getAll(req) {
@@ -93,59 +92,6 @@ let VegEnrollmentController = VegEnrollmentController_1 = class VegEnrollmentCon
                 return 'deleted';
             }
             throw new common_1.ForbiddenException();
-        });
-    }
-    getAllOrders(req, enrollmentId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            enrollmentId = parseInt(enrollmentId, 10);
-            const enrollment = yield VegEnrollment_1.VegEnrollment.findOne(enrollmentId);
-            if (!enrollment)
-                throw new common_1.NotFoundException("enrollment not found.");
-            if (!VegEnrollmentController_1.hasPolicy(req.user, enrollment))
-                throw new common_1.ForbiddenException();
-            return yield EnrollmentOrder_1.EnrollmentOrder.find({ type: EnrollmentOrder_1.EnrollmentType.VegAndFruit, enrollmentId });
-        });
-    }
-    createOrder(req, enrollmentId, orderInfo) {
-        return __awaiter(this, void 0, void 0, function* () {
-            enrollmentId = parseInt(enrollmentId, 10);
-            const enrollment = yield VegEnrollment_1.VegEnrollment.findOne(enrollmentId);
-            if (!enrollment)
-                throw new common_1.NotFoundException("enrollment not found.");
-            if (!VegEnrollmentController_1.hasPolicy(req.user, enrollment))
-                throw new common_1.ForbiddenException();
-            const order = new EnrollmentOrder_1.EnrollmentOrder(Object.assign({ type: EnrollmentOrder_1.EnrollmentType.VegAndFruit, enrollmentId: enrollmentId }, orderInfo));
-            return yield order.save();
-        });
-    }
-    replaceOrder(req, enrollmentId, orderId, orderInfo) {
-        return __awaiter(this, void 0, void 0, function* () {
-            enrollmentId = parseInt(enrollmentId, 10);
-            const enrollment = yield VegEnrollment_1.VegEnrollment.findOne(enrollmentId);
-            if (!enrollment)
-                throw new common_1.NotFoundException("enrollment not found.");
-            if (!VegEnrollmentController_1.hasPolicy(req.user, enrollment))
-                throw new common_1.ForbiddenException();
-            const order = yield EnrollmentOrder_1.EnrollmentOrder.findOne({ id: orderId, type: EnrollmentOrder_1.EnrollmentType.VegAndFruit, enrollmentId: enrollmentId });
-            if (!order)
-                throw new common_1.NotFoundException("order not found.");
-            Object.assign(order, orderInfo);
-            return yield order.save();
-        });
-    }
-    deleteOrder(req, enrollmentId, orderId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            enrollmentId = parseInt(enrollmentId, 10);
-            const enrollment = yield VegEnrollment_1.VegEnrollment.findOne(enrollmentId);
-            if (!enrollment)
-                throw new common_1.NotFoundException("enrollment not found.");
-            if (!VegEnrollmentController_1.hasPolicy(req.user, enrollment))
-                throw new common_1.ForbiddenException();
-            const order = yield EnrollmentOrder_1.EnrollmentOrder.findOne({ id: orderId, type: EnrollmentOrder_1.EnrollmentType.VegAndFruit, enrollmentId: enrollmentId });
-            if (!order)
-                throw new common_1.NotFoundException("order not found.");
-            order.remove();
-            return 'deleted';
         });
     }
     static hasPolicy(user, enrollment) {
@@ -224,71 +170,11 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], VegEnrollmentController.prototype, "delete", null);
-__decorate([
-    swagger_1.ApiOperation({ title: "获取指定登记的订单信息" }),
-    swagger_1.ApiImplicitParam({ name: "id", description: "登记id", required: true, type: Number }),
-    swagger_1.ApiOkResponse({ description: "订单信息", type: EnrollmentOrder_1.EnrollmentOrder, isArray: true }),
-    swagger_1.ApiNotFoundResponse({ description: "登记不存在" }),
-    swagger_1.ApiForbiddenResponse({ description: "无权查看" }),
-    common_1.UseGuards(passport_1.AuthGuard("jwt")),
-    common_1.Get('/:id/orders'),
-    __param(0, common_1.Req()), __param(1, common_1.Param('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], VegEnrollmentController.prototype, "getAllOrders", null);
-__decorate([
-    swagger_1.ApiOperation({ title: "新增登记情况的订单" }),
-    swagger_1.ApiImplicitParam({ name: "id", description: "登记id", required: true, type: Number }),
-    swagger_1.ApiCreatedResponse({ description: "订单信息", type: EnrollmentOrder_1.EnrollmentOrder }),
-    swagger_1.ApiForbiddenResponse({ description: "无权增加" }),
-    common_1.UsePipes(new common_1.ValidationPipe({
-        forbidUnknownValues: true,
-        transform: true
-    })),
-    common_1.UseGuards(passport_1.AuthGuard('jwt')),
-    common_1.Post('/:id/orders'),
-    __param(0, common_1.Req()), __param(1, common_1.Param('id')), __param(2, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, EnrollmentOrder_1.EnrollmentOrder]),
-    __metadata("design:returntype", Promise)
-], VegEnrollmentController.prototype, "createOrder", null);
-__decorate([
-    swagger_1.ApiOperation({ title: "编辑登记情况的订单" }),
-    swagger_1.ApiImplicitParam({ name: "enrollmentId", description: "登记id", required: true, type: Number }),
-    swagger_1.ApiImplicitParam({ name: "orderId", description: "订单id", required: true, type: Number }),
-    swagger_1.ApiOkResponse({ description: "订单信息", type: EnrollmentOrder_1.EnrollmentOrder }),
-    swagger_1.ApiForbiddenResponse({ description: "无权修改" }),
-    common_1.UsePipes(new common_1.ValidationPipe({
-        forbidUnknownValues: true,
-        transform: true,
-        skipMissingProperties: true
-    })),
-    common_1.UseGuards(passport_1.AuthGuard('jwt')),
-    common_1.Put('/:enrollmentId/orders/:orderId'),
-    __param(0, common_1.Req()), __param(1, common_1.Param('enrollmentId')), __param(2, common_1.Param('orderId')), __param(3, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object, EnrollmentOrder_1.EnrollmentOrder]),
-    __metadata("design:returntype", Promise)
-], VegEnrollmentController.prototype, "replaceOrder", null);
-__decorate([
-    swagger_1.ApiOperation({ title: "删除登记情况的订单" }),
-    swagger_1.ApiImplicitParam({ name: "enrollmentId", description: "登记id", required: true, type: Number }),
-    swagger_1.ApiImplicitParam({ name: "orderId", description: "订单id", required: true, type: Number }),
-    swagger_1.ApiOkResponse({ description: "deleted." }),
-    swagger_1.ApiForbiddenResponse({ description: "无权删除" }),
-    common_1.UseGuards(passport_1.AuthGuard('jwt')),
-    common_1.Delete('/:enrollmentId/orders/:orderId'),
-    __param(0, common_1.Req()), __param(1, common_1.Param('enrollmentId')), __param(2, common_1.Param('orderId')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object]),
-    __metadata("design:returntype", Promise)
-], VegEnrollmentController.prototype, "deleteOrder", null);
 VegEnrollmentController = VegEnrollmentController_1 = __decorate([
-    swagger_1.ApiUseTags("蔬果产方登记"),
+    swagger_1.ApiUseTags("蔬果产方登记订单管理"),
     swagger_1.ApiBearerAuth(),
     common_1.Controller('vegEnrollment'),
     __metadata("design:paramtypes", [])
 ], VegEnrollmentController);
 exports.VegEnrollmentController = VegEnrollmentController;
-//# sourceMappingURL=veg-enrollment.controller.js.map
+//# sourceMappingURL=veg-enrollment-order.controller.js.map
