@@ -29,7 +29,7 @@ import {
     ApiNotFoundResponse
   
   } from '@nestjs/swagger';
-import { EnrollmentOrder, EnrollmentType } from 'entities/EnrollmentOrder';
+import { EnrollmentOrder, EnrollmentType } from './entities/EnrollmentOrder';
 
 @ApiUseTags("蔬果产方登记")
 @ApiBearerAuth()

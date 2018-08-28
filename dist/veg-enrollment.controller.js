@@ -26,7 +26,7 @@ const VegEnrollment_1 = require("./entities/VegEnrollment");
 const User_1 = require("./entities/User");
 const passport_1 = require("@nestjs/passport");
 const swagger_1 = require("@nestjs/swagger");
-const EnrollmentOrder_1 = require("entities/EnrollmentOrder");
+const EnrollmentOrder_1 = require("./entities/EnrollmentOrder");
 let VegEnrollmentController = VegEnrollmentController_1 = class VegEnrollmentController {
     constructor() { }
     getAll(req) {
