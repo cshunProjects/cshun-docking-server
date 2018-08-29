@@ -66,7 +66,7 @@ export class VegEnrollmentController {
   @ApiOperation({title:"获取产方登记情况(全部信息，包括敏感信息)",description:"权限控制同上"})
   @ApiResponse({status:404,description:"不存在的id"})
   @ApiForbiddenResponse({description:"无权查看"})
-  @ApiImplicitParam({name:"Id",type:Number})
+  @ApiImplicitParam({name:"id",type:Number})
   @UseGuards(AuthGuard('jwt'))
   @Get('/:id')
   async getById(@Req() req, @Param('id') id) {
@@ -104,7 +104,7 @@ export class VegEnrollmentController {
   @ApiOkResponse({description:"修改后的登记信息"})
   @ApiForbiddenResponse({description:"无权修改"})
   @ApiImplicitBody({name:"VegEnrollment",type:VegEnrollment})
-  @ApiImplicitParam({name:"Id",type:Number})
+  @ApiImplicitParam({name:"id",type:Number})
   @UsePipes(
     new ValidationPipe({
       forbidUnknownValues: true,
@@ -128,7 +128,7 @@ export class VegEnrollmentController {
   @ApiOperation({title:"删除登记",description:"权限控制同上"})
   @ApiOkResponse({description:"deleted"})
   @ApiForbiddenResponse({description:"无权删除"})
-  @ApiImplicitParam({name:"Id",type:Number})
+  @ApiImplicitParam({name:"id",type:Number})
   @Delete('/:id')
   @UseGuards(AuthGuard('jwt'))
   async delete(@Req() req, @Param('id') id) {

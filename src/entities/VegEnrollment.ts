@@ -55,9 +55,9 @@ export class VegEnrollment extends BaseEntity {
     @Column({ nullable: false })
     hasCoolStore: boolean; 
 
-    @ApiModelProperty({description:"是否有订单"})
-    @Column({ nullable: false })
-    hasOrder: boolean;  
+    // @ApiModelProperty({description:"是否有订单"})
+    // @Column({ nullable: false })
+    // hasOrder: boolean;  
 
     @ApiModelProperty({description:"最低销售价格(每斤)"})
     @Column("double",{ nullable: false })

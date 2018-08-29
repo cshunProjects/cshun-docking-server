@@ -78,11 +78,6 @@ __decorate([
     __metadata("design:type", Boolean)
 ], VegEnrollment.prototype, "hasCoolStore", void 0);
 __decorate([
-    swagger_1.ApiModelProperty({ description: "是否有订单" }),
-    typeorm_1.Column({ nullable: false }),
-    __metadata("design:type", Boolean)
-], VegEnrollment.prototype, "hasOrder", void 0);
-__decorate([
     swagger_1.ApiModelProperty({ description: "最低销售价格(每斤)" }),
     typeorm_1.Column("double", { nullable: false }),
     __metadata("design:type", Number)
