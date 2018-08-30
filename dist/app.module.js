@@ -14,13 +14,14 @@ const auth_service_1 = require("./auth.service");
 const jwt_strategy_1 = require("./jwt.strategy");
 const user_controller_1 = require("./user.controller");
 const veg_enrollment_controller_1 = require("./veg-enrollment.controller");
+const animal_enrollment_controller_1 = require("./animal-enrollment.controller");
 const config_controller_1 = require("./config.controller");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [typeorm_1.TypeOrmModule.forRoot()],
-        controllers: [app_controller_1.AppController, user_controller_1.UserController, veg_enrollment_controller_1.VegEnrollmentController, config_controller_1.ConfigController],
+        controllers: [app_controller_1.AppController, user_controller_1.UserController, veg_enrollment_controller_1.VegEnrollmentController, config_controller_1.ConfigController, animal_enrollment_controller_1.AnimalEnrollmentController],
         providers: [app_service_1.AppService, auth_service_1.AuthService, jwt_strategy_1.JwtStrategy],
     })
 ], AppModule);

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const VegEnrollment_1 = require("./VegEnrollment");
+const AnimalEnrollment_1 = require("./AnimalEnrollment");
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
 var UserAdminType;
@@ -81,6 +82,10 @@ __decorate([
     typeorm_1.OneToMany(type => VegEnrollment_1.VegEnrollment, enrollment => enrollment.creator),
     __metadata("design:type", Promise)
 ], User.prototype, "vegEnrollments", void 0);
+__decorate([
+    typeorm_1.OneToMany(type => AnimalEnrollment_1.AnimalEnrollment, enrollment => enrollment.creator),
+    __metadata("design:type", Promise)
+], User.prototype, "animalEnrollments", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)

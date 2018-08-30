@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, BaseEntity ,OneToMany} from "typeorm";
 import { Options } from "@nestjs/common";
 import { VegEnrollment } from "./VegEnrollment";
+import {AnimalEnrollment} from "./AnimalEnrollment";
 import {IsAlphanumeric,Length,IsString,MaxLength, IsNumberString} from "class-validator";
 import { ApiModelProperty,ApiModelPropertyOptional } from '@nestjs/swagger';
 export enum UserAdminType {
@@ -56,7 +57,9 @@ export class User extends BaseEntity {
 
     @OneToMany(type => VegEnrollment, enrollment => enrollment.creator)
     vegEnrollments: Promise<VegEnrollment[]>
-    
+
+    @OneToMany(type => AnimalEnrollment, enrollment => enrollment.creator)
+    animalEnrollments: Promise<AnimalEnrollment[]>
 
     @CreateDateColumn()
     createdAt: Date;
