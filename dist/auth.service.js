@@ -25,7 +25,7 @@ let AuthService = class AuthService {
     createToken(user) {
         return __awaiter(this, void 0, void 0, function* () {
             const payload = { id: user.id };
-            return jwt.sign(payload, process.env['JWT_SECRET_KEY'], { expiresIn: 3600 });
+            return jwt.sign(payload, process.env['JWT_SECRET_KEY'], { expiresIn: 360000 });
         });
     }
     validateUser(payload) {
