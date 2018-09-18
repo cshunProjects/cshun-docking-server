@@ -35,7 +35,7 @@ export class EnrollmentOrder extends BaseEntity {
 
     @Allow()
     @ApiModelPropertyOptional({description:"每斤价格"})
-    @Column('double')
+    @Column('float')
     price: number;
 
     @Allow()

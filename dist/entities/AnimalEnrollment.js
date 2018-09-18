@@ -69,7 +69,7 @@ __decorate([
 ], AnimalEnrollment.prototype, "outOfBarDate", void 0);
 __decorate([
     swagger_1.ApiModelProperty({ description: "出栏数量" }),
-    typeorm_1.Column("double", { nullable: false }),
+    typeorm_1.Column("float", { nullable: false }),
     __metadata("design:type", Number)
 ], AnimalEnrollment.prototype, "outOfBarCount", void 0);
 __decorate([
@@ -79,7 +79,7 @@ __decorate([
 ], AnimalEnrollment.prototype, "hasCoolStore", void 0);
 __decorate([
     swagger_1.ApiModelProperty({ description: "最低销售价格(每个)" }),
-    typeorm_1.Column("double", { nullable: false }),
+    typeorm_1.Column("float", { nullable: false }),
     __metadata("design:type", Number)
 ], AnimalEnrollment.prototype, "minPrice", void 0);
 __decorate([
@@ -93,12 +93,12 @@ __decorate([
 ], AnimalEnrollment.prototype, "orderIds", void 0);
 __decorate([
     swagger_1.ApiModelProperty({ description: "规模数量(个)" }),
-    typeorm_1.Column("double", { nullable: false }),
+    typeorm_1.Column("float", { nullable: false }),
     __metadata("design:type", Number)
 ], AnimalEnrollment.prototype, "area", void 0);
 __decorate([
     swagger_1.ApiModelProperty({ description: "产量(个)" }),
-    typeorm_1.Column("double", { nullable: false }),
+    typeorm_1.Column("float", { nullable: false }),
     __metadata("design:type", Number)
 ], AnimalEnrollment.prototype, "yield", void 0);
 __decorate([

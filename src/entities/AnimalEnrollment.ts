@@ -48,7 +48,7 @@ export class AnimalEnrollment extends BaseEntity {
     outOfBarDate: Date;   
 
     @ApiModelProperty({description:"出栏数量"})
-    @Column("double",{ nullable: false })
+    @Column("float",{ nullable: false })
     outOfBarCount: number;  
 
     @ApiModelProperty({description:"是否有冷链仓储"})
@@ -60,7 +60,7 @@ export class AnimalEnrollment extends BaseEntity {
     // hasOrder: boolean;  
 
     @ApiModelProperty({description:"最低销售价格(每个)"})
-    @Column("double",{ nullable: false })
+    @Column("float",{ nullable: false })
     minPrice: number;  
 
     @ApiModelPropertyOptional({description:"地理位置"})
@@ -72,11 +72,11 @@ export class AnimalEnrollment extends BaseEntity {
 
 
     @ApiModelProperty({description:"规模数量(个)"})
-    @Column("double",{ nullable: false })
+    @Column("float",{ nullable: false })
     area: number;  
 
     @ApiModelProperty({description:"产量(个)"})
-    @Column("double",{ nullable: false })
+    @Column("float",{ nullable: false })
     yield: number;  
 
 

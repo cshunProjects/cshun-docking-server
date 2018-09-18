@@ -79,7 +79,7 @@ __decorate([
 ], VegEnrollment.prototype, "hasCoolStore", void 0);
 __decorate([
     swagger_1.ApiModelProperty({ description: "最低销售价格(每斤)" }),
-    typeorm_1.Column("double", { nullable: false }),
+    typeorm_1.Column("float", { nullable: false }),
     __metadata("design:type", Number)
 ], VegEnrollment.prototype, "minPrice", void 0);
 __decorate([
@@ -93,12 +93,12 @@ __decorate([
 ], VegEnrollment.prototype, "orderIds", void 0);
 __decorate([
     swagger_1.ApiModelProperty({ description: "面积(亩)" }),
-    typeorm_1.Column("double", { nullable: false }),
+    typeorm_1.Column("float", { nullable: false }),
     __metadata("design:type", Number)
 ], VegEnrollment.prototype, "area", void 0);
 __decorate([
     swagger_1.ApiModelProperty({ description: "产量(斤))" }),
-    typeorm_1.Column("double", { nullable: false }),
+    typeorm_1.Column("float", { nullable: false }),
     __metadata("design:type", Number)
 ], VegEnrollment.prototype, "yield", void 0);
 __decorate([

@@ -53,7 +53,7 @@ __decorate([
 __decorate([
     class_validator_1.Allow(),
     swagger_1.ApiModelPropertyOptional({ description: "每斤价格" }),
-    typeorm_1.Column('double'),
+    typeorm_1.Column('float'),
     __metadata("design:type", Number)
 ], EnrollmentOrder.prototype, "price", void 0);
 __decorate([
