@@ -35,7 +35,8 @@
     "sqlite3": "^4.0.2",
     "ts-node": "^4.1.0",
     "typeorm": "^0.2.7",
-    "typescript": "^2.6.2"
+    "typescript": "^2.6.2",
+    "pg":"^7.4.1"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.0.0",
