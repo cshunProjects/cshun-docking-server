@@ -60,7 +60,7 @@ export class VegEnrollment extends BaseEntity {
     // hasOrder: boolean;  
 
     @ApiModelProperty({description:"最低销售价格(每斤)"})
-    @Column("double",{ nullable: false })
+    @Column("float",{ nullable: false })
     minPrice: number;  
 
     @ApiModelPropertyOptional({description:"地理位置"})
@@ -72,11 +72,11 @@ export class VegEnrollment extends BaseEntity {
 
 
     @ApiModelProperty({description:"面积(亩)"})
-    @Column("double",{ nullable: false })
+    @Column("float",{ nullable: false })
     area: number;  
 
     @ApiModelProperty({description:"产量(斤))"})
-    @Column("double",{ nullable: false })
+    @Column("float",{ nullable: false })
     yield: number;  
 
     
