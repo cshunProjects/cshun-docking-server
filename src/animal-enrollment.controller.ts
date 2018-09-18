@@ -48,16 +48,16 @@ export class AnimalEnrollmentController {
         return await AnimalEnrollment.createQueryBuilder().getMany();
       case UserAdminType.Normal:
         return await AnimalEnrollment.createQueryBuilder()
-          .where('AnimalEnrollment.creatorId = :id', user)
+          .where('"creatorId" = :id', user)
           .getMany();
       case UserAdminType.Street:
         return await AnimalEnrollment.createQueryBuilder()
-          .where('AnimalEnrollment.creatorId = :id OR AnimalEnrollment.street = :street', user)
+          .where('"creatorId" = :id OR street = :street', user)
           .getMany();
       case UserAdminType.Town:
         return await AnimalEnrollment.createQueryBuilder()
           .orWhere(
-            'creatorId = :id OR (AnimalEnrollment.street = :street AND AnimalEnrollment.town = :town)',
+            '"creatorId" = :id OR (street = :street AND town = :town)',
             user,
           )
           .getMany();

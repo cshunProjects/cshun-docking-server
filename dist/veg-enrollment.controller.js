@@ -37,15 +37,16 @@ let VegEnrollmentController = VegEnrollmentController_1 = class VegEnrollmentCon
                     return yield VegEnrollment_1.VegEnrollment.createQueryBuilder().getMany();
                 case User_1.UserAdminType.Normal:
                     return yield VegEnrollment_1.VegEnrollment.createQueryBuilder()
-                        .where('VegEnrollment.creatorId = :id', user)
+                        .where('"creatorId" = :id', user)
                         .getMany();
                 case User_1.UserAdminType.Street:
                     return yield VegEnrollment_1.VegEnrollment.createQueryBuilder()
-                        .where('VegEnrollment.creatorId = :id OR VegEnrollment.street = :street', user)
+                        .where('"creatorId" = :id', user)
+                        .orWhere('street = :street')
                         .getMany();
                 case User_1.UserAdminType.Town:
                     return yield VegEnrollment_1.VegEnrollment.createQueryBuilder()
-                        .orWhere('VegEnrollment.creatorId = :id OR (VegEnrollment.street = :street AND VegEnrollment.town = :town)', user)
+                        .orWhere('"creatorId" = :id OR (street = :street AND town = :town)', user)
                         .getMany();
             }
         });

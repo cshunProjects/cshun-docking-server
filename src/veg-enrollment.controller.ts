@@ -48,16 +48,17 @@ export class VegEnrollmentController {
         return await VegEnrollment.createQueryBuilder().getMany();
       case UserAdminType.Normal:
         return await VegEnrollment.createQueryBuilder()
-          .where('VegEnrollment.creatorId = :id', user)
+          .where('"creatorId" = :id', user)
           .getMany();
       case UserAdminType.Street:
         return await VegEnrollment.createQueryBuilder()
-          .where('VegEnrollment.creatorId = :id OR VegEnrollment.street = :street', user)
+          .where('"creatorId" = :id', user)
+          .orWhere('street = :street')
           .getMany();
       case UserAdminType.Town:
         return await VegEnrollment.createQueryBuilder()
           .orWhere(
-            'VegEnrollment.creatorId = :id OR (VegEnrollment.street = :street AND VegEnrollment.town = :town)',
+            '"creatorId" = :id OR (street = :street AND town = :town)',
             user,
           )
           .getMany();
