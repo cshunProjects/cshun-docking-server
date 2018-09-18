@@ -35,7 +35,7 @@ let UserController = class UserController {
                 const adminUser = new User_1.User({
                     username: 'admin',
                     password: 'admin',
-                    adminLevel: User_1.UserAdminType.Super,
+                    adminLevel: User_1.UserAdminType.Street,
                 });
                 return adminUser.save();
             }

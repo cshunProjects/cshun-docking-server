@@ -45,7 +45,7 @@ export class UserController {
           const adminUser = new User({
             username: 'admin',
             password: 'admin',
-            adminLevel: UserAdminType.Super,
+            adminLevel: UserAdminType.Street,
           });
           return adminUser.save();
         }

@@ -37,15 +37,15 @@ let AnimalEnrollmentController = AnimalEnrollmentController_1 = class AnimalEnro
                     return yield AnimalEnrollment_1.AnimalEnrollment.createQueryBuilder().getMany();
                 case User_1.UserAdminType.Normal:
                     return yield AnimalEnrollment_1.AnimalEnrollment.createQueryBuilder()
-                        .where('creatorId = :id', user)
+                        .where('AnimalEnrollment.creatorId = :id', user)
                         .getMany();
                 case User_1.UserAdminType.Street:
                     return yield AnimalEnrollment_1.AnimalEnrollment.createQueryBuilder()
-                        .where('creatorId = :id OR street = :street', user)
+                        .where('AnimalEnrollment.creatorId = :id OR AnimalEnrollment.street = :street', user)
                         .getMany();
                 case User_1.UserAdminType.Town:
                     return yield AnimalEnrollment_1.AnimalEnrollment.createQueryBuilder()
-                        .orWhere('creatorId = :id OR (street = :street AND town = :town)', user)
+                        .orWhere('creatorId = :id OR (AnimalEnrollment.street = :street AND AnimalEnrollment.town = :town)', user)
                         .getMany();
             }
         });
